@@ -1,5 +1,5 @@
 # Grupo:
-## Gabriel Germano
-## Samara Accioly
-## Vitor Barros
-## Wellington Viana
+-  Gabriel Germano
+-  Samara Accioly
+-  Vitor Barros
+-  Wellington Viana
