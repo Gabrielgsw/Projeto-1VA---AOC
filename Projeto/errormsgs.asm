@@ -115,7 +115,7 @@ op_invalida:
     jal print_str                                                       
     j start                                                             
 
-arquivo_exception:
+arquivo_erro:
     la $a0, arquivo_exception
     jal print_str
     la $a0, arquivo
