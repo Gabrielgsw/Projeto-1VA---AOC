@@ -2,7 +2,6 @@
 
 
 invalid_ap_exception: .asciiz "Apartamento invalido!\n"
-adicionar_apartamento_sucess: .asciiz "Apartamento adicionado com sucesso!\n"
 limite_moradores_excepetion: .asciiz "O limite de moradores foi atingido!\n"
 ap_vazio_exception: .asciiz "Este apartamento ja esta vazio!\n"
 morador_inexistente_exception: .asciiz "Morador nao existente\n"
@@ -153,10 +152,7 @@ remover_automovel:
     jal print_str                                                       
     j start                                                             
 
-adicionar_apartamento
-     la $a0, adicionar_apartamento_sucess                                               
-    jal print_str                                                       
-    j start  
+ 
 
 
 # cmd_6
