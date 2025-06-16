@@ -17,8 +17,8 @@ arquivo_exception: .asciiz "O arquivo nao foi encontrado! "
 
 cmd_invalido_exception: .asciiz "Comando invalido!\n"
 op_invalida_exception: .asciiz "Opcao invalida!\n"
-new_line: .asciiz "\n"
-tab: .asciiz "\t"
+new_line_: .asciiz "\n"
+tab_: .asciiz "\t"
 
 # cmd_6
 
@@ -120,12 +120,12 @@ arquivo_erro:
     jal print_str
     la $a0, arquivo
     jal print_str
-    la $a0, new_line
+    la $a0, new_line_
     jal print_str
     j start
 
 new_line:
-    la $a0, new_line
+    la $a0, new_line_
     addi $sp, $sp, -4           
     sw $ra, 0($sp)
     jal print_str
@@ -133,7 +133,7 @@ new_line:
     addi $sp, $sp, 4
     jr $ra
 tab:
-    la $a0, tab
+    la $a0, tab_
     addi $sp, $sp, -4
     sw $ra, 0($sp)
     jal print_str
