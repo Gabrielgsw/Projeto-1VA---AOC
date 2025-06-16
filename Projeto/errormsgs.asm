@@ -38,8 +38,7 @@ remover_automovel_sucess: .asciiz "Automovel removido com sucesso!\n"
 
 
 .text
-.globl tab,op_invalida_exception,ap_num,moradores_ap,carro_ap,moto_ap,cor_ap,unexpected_error1,unexpected_error2,unexpected_,add_automovel_vazio_exception,remover_automovel_sucess,invalid_ap_exception,cmd_invalido_exception,arquivo_exception,salvar_sucess,limite_vagas_exception,adicionar_automovel_exception,limite_moradores_excepetion,ap_vazio_exception,morador_inexistente_exception,espaco_vazio_exception,adicionar_morador_sucess,remover_morador_sucess,veiculo_invalido_exception,
-
+.globl invalid_ap,limite_moradores,ap_vazio,morador_inexistente,unexpected_error1_ap,adicionar_morador,remover_morador,veiculo_invalido,limite_vagas,adicionar_automovel,salvar,recarregar,cmd_invalido,op_invalida,arquivo_erro,new_line,tab,add_automovel_vazio,remover_automovel,unexpected_error1_info,unexpected_error2_info,unexpected_error3_info,ap_vazio,ap,moradores,carro,moto,modelo,cor
 
 # funcoes para informar erro/sucesso durante a execucao do programa
 
@@ -226,4 +225,3 @@ cor:
     lw $ra, 0($sp)
     addi $sp, $sp, 4
     jr $ra
-
