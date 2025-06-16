@@ -38,7 +38,7 @@ remover_automovel_sucess: .asciiz "Automovel removido com sucesso!\n"
 
 
 .text
-.globl invalid_ap,limite_moradores,ap_vazio,morador_inexistente,unexpected_error1_ap,adicionar_morador,remover_morador,veiculo_invalido,limite_vagas,adicionar_automovel,salvar,recarregar,cmd_invalido,op_invalida,arquivo_erro,new_line,tab,add_automovel_vazio,remover_automovel,unexpected_error1_info,unexpected_error2_info,unexpected_error3_info,ap_vazio,ap,moradores,carro,moto,modelo,cor
+.globl invalid_ap,ap_vazio_erro,limite_moradores,morador_inexistente,unexpected_error1_ap,adicionar_morador,remover_morador,veiculo_invalido,limite_vagas,adicionar_automovel,salvar,recarregar,cmd_invalido,op_invalida,arquivo_erro,new_line,tab,add_automovel_vazio,remover_automovel,unexpected_error1_info,unexpected_error2_info,unexpected_error3_info,ap_vazio,ap,moradores,carro,moto,modelo,cor
 
 # funcoes para informar erro/sucesso durante a execucao do programa
 
@@ -53,7 +53,7 @@ limite_moradores:
     jal print_str
     j start
 
-ap_vazio:
+ap_vazio_erro:
     la $a0, ap_vazio_exception
     jal print_str
     j start
