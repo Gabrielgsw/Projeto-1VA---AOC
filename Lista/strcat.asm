@@ -1,3 +1,10 @@
+# Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+# Gabriel Germano dos Santos Wanderley
+# Samara Accioly
+# Vitor Barros de Carvalho
+# Wellington Viana da Silva Junior
+# Arquivo referente as funcoes de comando do projeto
+
 .data
 str1:       .asciiz "Bem"
 str2:       .asciiz "Vindo"
@@ -5,8 +12,8 @@ resultado:  .space 10 # Espaco para o resultado concatenado
 
 .text
 main:
-    la $a0, resultado # Endereço do destino (resultado)
-    la $a1, str1      # Endereço de str1
+    la $a0, resultado # EndereÃ§o do destino (resultado)
+    la $a1, str1      # EndereÃ§o de str1
     jal copy_string   # Copia str1 para resultado
 
     # $a0 deve apontar para o final de resultado
@@ -14,7 +21,7 @@ main:
     jal find_end      # Encontra o final da string
     move $a0, $v0     # Move o endereco final para $a0
 
-    la $a1, str2      # Endereço de str2
+    la $a1, str2      # EndereÃ§o de str2
     jal copy_string   # Copia str2 para resultado 
 
     # Imprime resultado
