@@ -1,3 +1,11 @@
+#Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+#Gabriel Germano dos Santos Wanderley
+#Samara Accioly
+#Vitor Barros de Carvalho
+#Wellington Viana da Silva Junior
+#Arquivo referente a questão 1 - letra b
+#Implementa a lógica do memcpy 
+
 .data
     origem: .asciiz "Hello World"     #String de origem
     copia:  .space 12                 #espaço reservado para a cópia (11 + 1 para '\0')
