@@ -838,7 +838,7 @@ escrever_ap:
     jal pular_linha_arquivo       			   # quebra de linha
 
 # gravar nomes dos moradores
-    li $t6, 5                    			   # contador de palavras (5 moradores + flag)
+    li $t6, 5                    			   # contador de palavras (6 moradores + flag)
 
 salvar_dados:
     lw $t5, 8($t4)               			   # carrega endereco da string
