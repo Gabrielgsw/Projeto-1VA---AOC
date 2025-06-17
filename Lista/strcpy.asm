@@ -1,3 +1,11 @@
+# Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+# Gabriel Germano dos Santos Wanderley
+# Samara Accioly
+# Vitor Barros de Carvalho
+# Wellington Viana da Silva Junior
+# Questão 1) letra a)
+# Arquivo referente à função 'strcpy': Copia uma string — incluindo o caractere NULL (‘\0’) — apontado pela source diretamente para o bloco de memória apontado pelo destination.
+
 .data
 	string: .asciiz "Palavra"
 	dest:  .space 7 #aloca os bytes necessários para armazenar a string 
