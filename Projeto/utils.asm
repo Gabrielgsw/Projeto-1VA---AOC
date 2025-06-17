@@ -442,7 +442,7 @@ processar_comando:
         la $a0, info_geral                                              	# Caso 'info_geral'
         li $a3, 10
         jal strncmp                                                     
-        #beqz $v0, info_geral_fn                                         
+        beqz $v0, info_geral_fn                                         
 
         la $a0, formatar                                                	# Caso 'formatar'
         li $a3, 8
