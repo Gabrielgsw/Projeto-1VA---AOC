@@ -1,3 +1,11 @@
+#Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+#Gabriel Germano dos Santos Wanderley
+#Samara Accioly
+#Vitor Barros de Carvalho
+#Wellington Viana da Silva Junior
+#Arquivo que implementa o main do projeto.
+ 
+
 #Constantes para uso no MMIO
 .eqv E 10                                                               #código ASCII de Enter
 .eqv BP 8                                                               #código ASCII de Backspace
