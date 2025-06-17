@@ -7,7 +7,7 @@
 
 .data                                                                                                                   
 
-arquivo: .asciiz "C:\\Users\\Gabriel Germano\\Desktop\\Projeto1-AOC\\output.txt"
+arquivo: .asciiz "C:\\Users\\Gabriel Germano\\Desktop\\Projeto1-AOC\\arquivo.txt"
 info_geral_print: .asciiz "Nao vazios:    xxxx (xxx%)\nVazios:        xxxx (xxx%)\n"
 info_apartamento: .asciiz "all"
 cmd_5_limpar_ap_fn: .asciiz "limpar_ap-<apt>\n"
