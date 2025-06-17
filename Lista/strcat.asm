@@ -3,7 +3,6 @@
 # Samara Accioly
 # Vitor Barros de Carvalho
 # Wellington Viana da Silva Junior
-# Arquivo referente as funcoes de comando do projeto
 
 .data
 str1:       .asciiz "Bem"
