@@ -1,3 +1,10 @@
+# Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+# Gabriel Germano dos Santos Wanderley
+# Samara Accioly
+# Vitor Barros de Carvalho
+# Wellington Viana da Silva Junior
+# Arquivo referente as funcoes de comando do projeto
+
 .data                                                                                                                   
 
 arquivo: .asciiz "C:\\Users\\Gabriel Germano\\Desktop\\Projeto1-AOC\\output.txt"
@@ -17,59 +24,59 @@ ad_morador_fn:
 
 # extrair e valida o numero do apartamento
     addi $a0, $zero, 1                                      # extrai a opcao 1 (numero do ap)
-    la   $a1, input                                         # input recebido do terminal
-    jal  get_funcao                                         # extrai string da opcao 1
+    la $a1, input                                           # input recebido do terminal
+    jal get_funcao                                          # extrai string da opcao 1
     move $a0, $v0                                           # $a0 endereco da string
 
-    jal  str_to_int                                         # converte string para inteiro
+    jal str_to_int                                          # converte string para inteiro
     move $a0, $a0                                           # $a0 libera a string da heap
-    jal  free
+    jal free
 
     move $a0, $v0                                           # $a0 numero do apartamento
-    jal  get_indice_ap                                      # obtem o indice (0-39) do vetor de apartamentos
+    jal get_indice_ap                                       # obtem o indice (0-39) do vetor de apartamentos
     move $t0, $v0                                           # $t0 indice do apartamento
 
     bltz $v0, invalid_ap                                    # se indice < 0, apartamento invalido -> aborta
 
 # localizar endereco do apartamento na memoria
-    la   $t4, building                                      # endereco base da estrutura building
-    li   $t1, 40                                            # cada apartamento ocupa 40 bytes
+    la $t4, building                                        # endereco base da estrutura building
+    li $t1, 40                                              # cada apartamento ocupa 40 bytes
     addi $t0, $t0, -1                                       # ajusta indice para base 0
     mult $t0, $t1                                           # calcula offset do apartamento
     mflo $t2
-    add  $t4, $t4, $t2                                      # $t4: endereco do apartamento desejado
+    add $t4, $t4, $t2                                       # $t4: endereco do apartamento desejado
 
 # checar se ainda ha vagas para moradores
     addi $t5, $t4, 4                                        # $t5: endereco do numero de moradores
-    lw   $t6, 0($t5)                                        # $t6: numero de moradores
-    bge  $t6, 5, limite_moradores                           # se ja houver 5 moradores -> aborta
+    lw $t6, 0($t5)                                          # $t6: numero de moradores
+    bge $t6, 5, limite_moradores                            # se ja houver 5 moradores -> aborta
 
 # incrementar numero de moradores
-    lw   $t3, 0($t5)                                        # $t3: numero de moradores
+    lw $t3, 0($t5)                                          # $t3: numero de moradores
     addi $t3, $t3, 1                                        # $t3 = $t3 + 1
-    sw   $t3, 0($t5)                                        # atualiza numero de moradores
+    sw $t3, 0($t5)                                          # atualiza numero de moradores
 
 # buscar slot vazio para novo morador
     addi $t5, $t5, 4                                        # $t5: endereco do primeiro slot de morador
-    add  $t7, $t5, 28                                       # $t7: limite superior (ultimo slot)
+    add $t7, $t5, 28                                        # $t7: limite superior (ultimo slot)
 
-busca_espaco_vazio:                                           # inicio da busca por slot vazio
+busca_espaco_vazio:                                         # inicio da busca por slot vazio
 # verificar se ha espaco disponivel antes de comecar a varredura
-    bge  $t5, $t7, ap_return_exception                     # se nao houver espaco, erro inesperado
+    bge $t5, $t7, ap_return_exception                      # se nao houver espaco, erro inesperado
 
 buscar_slot:
-    lw   $t6, 0($t5)                                        # carrega conteudo do slot atual
-    beq  $t6, $zero, slot_livre                             # se estiver vazio, ir para slot_livre
+    lw $t6, 0($t5)                                          # carrega conteudo do slot atual
+    beq $t6, $zero, slot_livre                              # se estiver vazio, ir para slot_livre
     addi $t5, $t5, 4                                        # avanca para proximo slot
-    blt  $t5, $t7, buscar_slot                              # continua enquanto nao atingir o fim
-    j    ap_return_exception                               # se passou do limite, erro inesperado
+    blt $t5, $t7, buscar_slot                               # continua enquanto nao atingir o fim
+    j ap_return_exception                                   # se passou do limite, erro inesperado
 
 slot_livre:                                                 # slot vazio encontrado
-    li   $a0, 2                                             # extrai a segunda opcao do input (nome)
-    la   $a1, input
-    jal  get_funcao
-    sw   $v0, 0($t5)                                        # armazena nome no slot livre
-    j    adicionar_morador                             	    # finaliza processo
+    li $a0, 2                                               # extrai a segunda opcao do input (nome)
+    la $a1, input
+    jal get_funcao
+    sw $v0, 0($t5)                                          # armazena nome no slot livre
+    j adicionar_morador                             	    # finaliza processo
 
       
   
@@ -153,28 +160,28 @@ ad_auto_fn:
 
 # validar numero do apartamento
     addi $a0, $zero, 1             			    # opcao 1: indice 1 da entrada = numero do apartamento
-    la   $a1, input                			    # endereco do input
-    jal  get_funcao             			    # extrai string do numero do AP e coloca em $v0
+    la $a1, input                			    # endereco do input
+    jal get_funcao             			        # extrai string do numero do AP e coloca em $v0
 
     move $a0, $v0                  			    # $a0: ponteiro para string do numero
-    jal  str_to_int                			    # converte string para inteiro -> retorna em $v0
+    jal str_to_int                			    # converte string para inteiro -> retorna em $v0
 
     move $a0, $a0
-    jal  free                      			    # libera a string do numero da heap
+    jal free                      			    # libera a string do numero da heap
 
     move $a0, $v0                  			    # $a0: numero inteiro do apartamento
-    jal  get_indice_ap              			    # converte numero para indice interno da estrutura
+    jal get_indice_ap              			    # converte numero para indice interno da estrutura
     bltz $v0, invalid_ap     			 	    # se indice < 0, apartamento e invalido
 
     move $t0, $v0                  			    # salva o indice valido em $t0
-    la   $t4, building             			    # carrega endereco base da estrutura 'building'
+    la $t4, building             			    # carrega endereco base da estrutura 'building'
 
 # calcular endereco da estrutura do apartamento
     addi $t1, $zero, 40            			    # cada AP ocupa 40 bytes
     addi $t0, $t0, -1              			    # indice da estrutura comeca em 0
     mult $t0, $t1
     mflo $t2                       			    # $t2: offset do AP
-    add  $t4, $t4, $t2             			    # $t4: endereco do apartamento dentro da estrutura
+    add $t4, $t4, $t2             			    # $t4: endereco do apartamento dentro da estrutura
 
     lw $t9, 4($t4)                 			    # verifica se o apartamento tem moradores
     beqz $t9, add_automovel_vazio     			    # se nao tiver, pula para rotina de AP vazio
@@ -182,75 +189,75 @@ ad_auto_fn:
     addi $t4, $t4, 28             			    # avanca para a area de automoveis na estrutura do AP
 
 # verificar espaco para automoveis
-    lw   $t7, 8($t4)               			    # $t7: flag de quantidade de veiculos (1 = carro, 2/3 = motos)
-    beq  $t7, 1, limite_vagas    			    # se ja tem um carro, nao pode adicionar mais
+    lw $t7, 8($t4)               			    # $t7: flag de quantidade de veiculos (1 = carro, 2/3 = motos)
+    beq $t7, 1, limite_vagas    			    # se ja tem um carro, nao pode adicionar mais
 
-    li   $a0, 2
-    la   $a1, input
-    jal  get_funcao             			    # extrai o tipo do veiculo (opcao 2)
+    li $a0, 2
+    la $a1, input
+    jal get_funcao             			        # extrai o tipo do veiculo (opcao 2)
     move $t0, $v0                  			    # $t0: ponteiro para string 'c' ou 'm'
     move $t2, $t0                  	  		    # guarda para liberar depois
-    lb   $t0, 0($t0)               			    # carrega caractere da opcao: 'c' ou 'm'
+    lb $t0, 0($t0)               			    # carrega caractere da opcao: 'c' ou 'm'
 
     move $a0, $t2
-    jal  free                      			    # libera a string da heap
+    jal free                      			    # libera a string da heap
 
-    li   $t1, 99                   			    # ASCII de 'c'
-    beq  $t0, $t1, se_carro        			    # se for 'c', pula para rotina de carro
+    li $t1, 99                   			    # ASCII de 'c'
+    beq $t0, $t1, se_carro        			    # se for 'c', pula para rotina de carro
 
-    li   $t1, 109                  			    # ASCII de 'm'
-    beq  $t0, $t1, se_moto         			    # se for 'm', pula para rotina de moto
+    li $t1, 109                  			    # ASCII de 'm'
+    beq $t0, $t1, se_moto         			    # se for 'm', pula para rotina de moto
 
-    j    veiculo_invalido              			    # tipo invalido
+    j veiculo_invalido              			# tipo invalido
 
 # logica de insercao de carro
 se_carro:
-    lw   $t7, 8($t4)               			   # verifica flag de quantidade de veiculos
+    lw $t7, 8($t4)               			   # verifica flag de quantidade de veiculos
     bgtz $t7, limite_vagas        			   # ja tem carro/moto? nao cabe
-    li   $t7, 1                    			   # flag 1 = 1 carro
-    sw   $t7, 8($t4)               			   # grava flag
-    j    salvar_automovel         			   # continua para alocar dados do carro
+    li $t7, 1                    			   # flag 1 = 1 carro
+    sw $t7, 8($t4)               			   # grava flag
+    j salvar_automovel         			       # continua para alocar dados do carro
 
 # logica de insercao de moto
 se_moto:
-    lw   $t7, 8($t4)               			   # le flag de quantidade de veiculos
-    beqz $t7, add_moto_1       			   # nenhum veiculo ainda? adiciona primeira moto
-    li   $t8, 3
-    beq  $t7, $t8, limite_vagas   			   # ja tem 2 motos? nao cabe mais
-    li   $t8, 2
-    beq  $t7, $t8, add_moto_2 			   # tem uma moto? vai adicionar a segunda
+    lw $t7, 8($t4)               			   # le flag de quantidade de veiculos
+    beqz $t7, add_moto_1       			       # nenhum veiculo ainda? adiciona primeira moto
+    li $t8, 3
+    beq $t7, $t8, limite_vagas   			   # ja tem 2 motos? nao cabe mais
+    li $t8, 2
+    beq $t7, $t8, add_moto_2 			       # tem uma moto? vai adicionar a segunda
 
-    j    veiculo_invalido              			   # se nao for nenhuma das condicoes, invalido
+    j veiculo_invalido              		   # se nao for nenhuma das condicoes, invalido
 
 add_moto_1:
-    li   $t7, 2                    			   # flag 2 = 1 moto
-    sw   $t7, 8($t4)               			   # salva flag
-    j    salvar_automovel
+    li $t7, 2                    			   # flag 2 = 1 moto
+    sw $t7, 8($t4)               			   # salva flag
+    j salvar_automovel
 
 add_moto_2:
-    li   $t7, 3                    			   # flag 3 = 2 motos
-    sw   $t7, 8($t4)             			   # salva nova flag
+    li $t7, 3                    			   # flag 3 = 2 motos
+    sw $t7, 8($t4)             			       # salva nova flag
     addi $t4, $t4, 4               			   # pula para segundo slot de moto
-    j    salvar_automovel
+    j salvar_automovel
 
 # alocar memoria e copiar dados do automovel
 salvar_automovel:
-    la   $a0, input
-    jal  get_tamanho_str              			   # retorna tamanho da string de entrada
+    la $a0, input
+    jal get_tamanho_str              		   # retorna tamanho da string de entrada
     move $a0, $v0
     addi $a0, $a0, -11             			   # ignora prefixo 'ad_auto-' (11 chars)
 
-    li   $v0, 9
+    li $v0, 9
     syscall                        			   # aloca espaco na heap
-    sw   $v0, 0($t4)               			   # salva o endereco do automovel no slot apropriado
+    sw $v0, 0($t4)               			   # salva o endereco do automovel no slot apropriado
 
     move $a2, $a0                  			   # $a2: tamanho
     move $a0, $v0                  			   # $a0: destino
-    la   $a1, input
+    la $a1, input
     addi $a1, $a1, 11              			   # $a1: fonte, ignora "ad_auto-"
-    jal  memcpy                    			   # copia modelo e cor para a heap
+    jal memcpy                    			   # copia modelo e cor para a heap
 
-    j    adicionar_automovel             		   # finaliza procedimento
+    j adicionar_automovel             		   # finaliza procedimento
     
 ######################################################### CMD_4 ######################################################### 
 # remove um automóvel de um apartamento: rm_auto-<apartamento>-<tipo>-<modelo>-<cor>
@@ -271,7 +278,7 @@ rm_auto_fn:
 
     move $a0, $v0             				   # passa o numero convertido como inteiro
     jal get_indice_ap          				   # retorna o indice do apartamento
-    bltz $v0, invalid_ap  				   # se indice < 0, apartamento invalido
+    bltz $v0, invalid_ap  				       # se indice < 0, apartamento invalido
 
     move $t0, $v0             				   # $t0: indice do apartamento
 
@@ -409,7 +416,7 @@ auto_nao_encontrado:
     lw $t8, 8($t4)
     li $t1, 3
     beq $t8, $t1, remover_moto_2 			   # tenta a segunda moto se houver 2
-                                      			   # caso contrario
+                                      			   
 
 # exibe erro: automovel nao encontrado
 fim_nao_encontrado:
@@ -422,50 +429,50 @@ fim_nao_encontrado:
 #limpa o apartamento no codigo: limpar_ap-<apartamento>
 limpar_ap_fn:                                              # funcao chamada no comando limpar_ap-<ap>
     addi $a0, $zero, 1                                     # carrega indice da opcao 1 (numero do apartamento)
-    la   $a1, input                                        # carrega o endereco da string de input
-    jal  get_funcao                                        # extrai o valor da opcao
+    la $a1, input                                          # carrega o endereco da string de input
+    jal get_funcao                                         # extrai o valor da opcao
     move $a0, $v0                                          # move o endereco para $a0
-    jal  str_to_int                                        # converte string para inteiro
+    jal str_to_int                                         # converte string para inteiro
     move $a0, $v0                                          # $a0: numero do apartamento
-    jal  get_indice_ap                                     # obtem o indice do apartamento no vetor
+    jal get_indice_ap                                      # obtem o indice do apartamento no vetor
     move $a0, $v0                                          # $a0: indice do apartamento
 
-    jal  limpa_ap_aux                                  # chama metodo auxiliar para limpar
-    j    start                                             # retorna ao inicio do programa
+    jal limpa_ap_aux                                    # chama metodo auxiliar para limpar
+    j start                                             # retorna ao inicio do programa
 
 
-limpa_ap_aux:                                          # funcao auxiliar para limpar apartamento
+limpa_ap_aux:                                              # funcao auxiliar para limpar apartamento
     move $t0, $a0                                          # $t0: numero do apartamento (indice ja convertido)
 
 # verificar se numero de apartamento esta dentro dos limites
-    ble  $t0, $zero, erro_ap_invalido
-    bgt  $t0, 40, erro_ap_invalido
-    j    contador
+    ble $t0, $zero, erro_ap_invalido
+    bgt $t0, 40, erro_ap_invalido
+    j contador
 
 erro_ap_invalido:
-    li   $v0, 4
-    la   $a0, invalid_ap                                   # carrega mensagem de erro
+    li $v0, 4
+    la $a0, invalid_ap                                    # carrega mensagem de erro
     addi $sp, $sp, -4
-    sw   $ra, 0($sp)
-    jal  print_str                                         # imprime erro
-    lw   $ra, 0($sp)
+    sw $ra, 0($sp)
+    jal print_str                                         # imprime erro
+    lw $ra, 0($sp)
     addi $sp, $sp, 4
     syscall                                                # chamada dummy, pode ser omitida
-    jr   $ra
+    jr $ra
 
 contador:
-    la   $t4, building                                     # endereco base do vetor de apartamentos
-    li   $t1, 40                                           # tamanho de cada apartamento
+    la $t4, building                                       # endereco base do vetor de apartamentos
+    li $t1, 40                                             # tamanho de cada apartamento
     addi $t0, $t0, -1                                      # converte numero para indice base 0
     mult $t0, $t1                                          # offset = ap_index * 40
     mflo $t2
-    add  $t4, $t4, $t2                                     # $t4: aponta para o inicio do apartamento
-    li   $t0, 9                                            # contador para limpar 9 posicoes (moradores + automoveis)
+    add $t4, $t4, $t2                                      # $t4: aponta para o inicio do apartamento
+    li $t0, 9                                              # contador para limpar 9 posicoes (moradores + automoveis)
 
 limpando_ap:
     addi $t4, $t4, 4                                       # avanca para proxima word (comeca ap's offset +8)
     addi $t0, $t0, -1                                      # decrementa contador
-    sw   $zero, 0($t4)                                     # zera a word atual
+    sw $zero, 0($t4)                                       # zera a word atual
     bnez $t0, limpando_ap                                  # se ainda nao terminou, continua loop
 
 fim:
@@ -683,15 +690,15 @@ info_geral_fn:
         beq $t2,$zero, fim_info_geral                            	
         lw $t4, 4($t0)                                      # carrega o numero de moradores do apartamento
         add $t0, $t0, $t1                       
-        beq $t4,$zero,  carrega_info_geral                       
+        beq $t4,$zero, carrega_info_geral                       
                         
         addi $t3, $t3, 1                        
         bnez $t2, carrega_info_geral                       
                         
     fim_info_geral:                     
         li $t7, 10                      
-        mult	$t7, $t3			                        # $t7 * $t3 = Hi and Lo registers
-        mflo	$t8					                        # numero de apartamentos vazios * 10
+        mult $t7, $t3			                            # $t7 * $t3 = Hi and Lo registers
+        mflo $t8					                        # numero de apartamentos vazios * 10
                                 
         li $t2, 4                       
         div $t8, $t2			                        # $t3 / $t1
@@ -903,85 +910,85 @@ end_escrever_ap:
 recarregar_fn:
 
 # abrir arquivo em modo de leitura
-    la   $a0, arquivo                  			   # nome do arquivo
-    li   $a1, 0                        			   # modo leitura
-    li   $a2, 0                        			   # flag
-    li   $v0, 13                       			   # syscall: open
+    la $a0, arquivo                  			   # nome do arquivo
+    li $a1, 0                        			   # modo leitura
+    li $a2, 0                        			   # flag
+    li $v0, 13                       			   # syscall: open
     syscall
 
     bltz $v0, arquivo_erro    				   # erro ao abrir o arquivo
     move $s7, $v0                      			   # salva file descriptor em $s7
 
 # ler conteudo do arquivo para o buffer input_file
-    li   $v0, 14                       			   # syscall: read
+    li $v0, 14                       			   # syscall: read
     move $a0, $s7                     			   # file descriptor
-    la   $a1, input_file              			   # endereco destino
-    li   $a2, 1000000                 			   # ate 1MB
+    la $a1, input_file              			   # endereco destino
+    li $a2, 1000000                 			   # ate 1MB
     syscall
 
 # inicializar ponteiros
-    la   $t0, input_file              			   # ponteiro de leitura do arquivo
-    la   $t1, building                			   # ponteiro de escrita em building
-    li   $t2, 40                      			   # contador de apartamentos
+    la $t0, input_file              			   # ponteiro de leitura do arquivo
+    la $t1, building                			   # ponteiro de escrita em building
+    li $t2, 40                      			   # contador de apartamentos
 
 carregar_ap_loop:
     blez $t2, fim_recarregar         			   # fim da leitura
 
 # le e ignora numero do apartamento
-    jal  busca_proxima_linha              			   # avanca ponteiro apos numero do apartamento
+    jal busca_proxima_linha              			   # avanca ponteiro apos numero do apartamento
 
 # ler numero de moradores
     move $a0, $t0
-    jal  str_to_int                  			   # converte string p/ inteiro
-    sw   $v0, 4($t1)                 			   # salva numero de moradores no offset 4
+    jal str_to_int                  			   # converte string p/ inteiro
+    sw $v0, 4($t1)                 			       # salva numero de moradores no offset 4
 
 # carregar moradores
-    li   $t3, 7                      			   # contador de moradores
+    li $t3, 7                      			       # contador de moradores
     addi $t4, $t1, 8                			   # $t4: aponta para a primeira string de morador
 
 carregar_moradores_loop:
     beqz $t3, fim_moradores
 
-    jal  busca_proxima_linha             			   # avanca $t0 para proxima string
+    jal busca_proxima_linha             			   # avanca $t0 para proxima string
     move $a0, $t0
-    jal  get_tamanho_str               			   # calcula tamanho da string
+    jal get_tamanho_str               			   # calcula tamanho da string
 
     beqz $v0, pular_morador         			   # se string vazia, ignora
 
 # alocar memoria e copia nome
     addi $a0, $v0, 1                			   # +1 para \0
     move $t5, $a0
-    li   $v0, 9                     			   # syscall: sbrk
+    li $v0, 9                     			      # syscall: sbrk
     syscall
 
-    sw   $v0, 0($t4)                			   # salva ponteiro em building
+    sw $v0, 0($t4)                			       # salva ponteiro em building
     move $a0, $v0                   			   # destino
     move $a1, $t0                   			   # origem
     move $a2, $t5                   			   # tamanho
-    jal  memcpy                     			   # copia nome
+    jal memcpy                     			       # copia nome
 
 pular_morador:
     addi $t4, $t4, 4               			   # proximo slot de string
     addi $t3, $t3, -1              			   # decrementa contador
-    j    carregar_moradores_loop
+    j carregar_moradores_loop
 
 fim_moradores:
 # ler a flag do automovel
     move $a0, $t0
-    jal  str_to_int
-    sw   $v0, 36($t1)              			   # offset da flag no apartamento
+    jal str_to_int
+    sw $v0, 36($t1)              			   # offset da flag no apartamento
 
-    jal  busca_proxima_linha            			   # pula para a proxima linha
+    jal busca_proxima_linha            			   # pula para a proxima linha
 
 # avancar para o proximo apartamento
     addi $t1, $t1, 40            			   # proximo apartamento
     addi $t2, $t2, -1
-    j    carregar_ap_loop
+    j carregar_ap_loop
 
 fim_recarregar:
 # fechar o arquivo
     move $a0, $s7
-    li   $v0, 16                   			   # syscall: close
+    li $v0, 16                   			   # syscall: close
     syscall
 
     j recarregar                 			   # volta para o inicio do programa
@@ -1010,17 +1017,17 @@ busca_proxima_linha:                                            # pula para a pr
 
 formatar_fn:
 # inicializar contador
-    li   $t0, 0                    			    # contador de apartamentos (0 a 39)
+    li $t0, 0                    			    # contador de apartamentos (0 a 39)
 
 limpar_loop:
-    bge  $t0, 40, fim_formatar     			    # se t0 >= 40, termina o loop
+    bge $t0, 40, fim_formatar     			    # se t0 >= 40, termina o loop
 
 # chamar funcao para limpar o apartamento t0 
     move $a0, $t0                  			    # passa indice do apartamento via $a0
-    jal  limpa_ap_aux          			            # limpa o apartamento
+    jal limpa_ap_aux          			            # limpa o apartamento
 
     addi $t0, $t0, 1               			    # incrementa o indice
-    j    limpar_loop               			    # repete para o proximo apartamento
+    j limpar_loop               			    # repete para o proximo apartamento
 
 fim_formatar:
     j start                        			    # retorna para o inicio do programa  
