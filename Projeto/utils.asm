@@ -337,17 +337,17 @@ get_indice_ap:
 get_funcao:
 	stack_reg                                               		# Salva os registradores na pilha para preservar o estado atual
     	add $t0, $zero, $a1                                              	# $t0 recebe o ponteiro para a string de entrada (input)
-    	la $t1, separador                                                 	# Carrega o endereço do caractere separador (ex: '-') em $t1
-    	lb $t1, 0($t1)                                                    	# Carrega o valor ASCII do separador em $t1
+    	la $t1, hifen                                                 	# Carrega o endereço do caractere hifen (ex: '-') em $t1
+    	lb $t1, 0($t1)                                                    	# Carrega o valor ASCII do hifen em $t1
     	add $t2, $a0, $zero                                               	# $t2 armazena a opção que desejamos extrair
 
     	procurar_hifen:                                                   	
         		lb $t3, 0($t0)                                           	# Carrega o byte atual da string em $t3
         		addi $t0, $t0, 1                                         	# Avança para o próximo byte da string
         		beqz $t3, fim_get_funcao                                 	# Se encontrar o final da string (\0), entao fim da execução
-        		bne $t3, $t1, procurar_hifen                              	# Se não for o separador, continua procurando
+        		bne $t3, $t1, procurar_hifen                              	# Se não for o hifen, continua procurando
         		addi $t2, $t2, -1                                        	# Reduz o contador de posição desejada
-        		beqz $t2, guardar_funcao                                 	# Se posição chegou a 0, encontramos o separador da opção desejada
+        		beqz $t2, guardar_funcao                                 	# Se posição chegou a 0, encontramos o hifen da opção desejada
         		j procurar_hifen                                         	# Faz o loop
     
     	guardar_funcao:                                                   	
@@ -357,8 +357,8 @@ get_funcao:
         			lb $t3, 0($t2)                                  	# Carrega byte atual em $t3
             		addi $t2, $t2, 1                                	# Avança para o próximo byte
             		beqz $t3, if_achar_funcao                       	# Se for byte nulo, chegou ao fim da string -> pula para próxima etapa
-            		bne $t3, $t1, achar_funcao                       	# Se não for o separador, continua
-            		addi $t2, $t2, -1                                	# Caso tenha encontrado o separador, volta um byte para marcar o fim da string
+            		bne $t3, $t1, achar_funcao                       	# Se não for o hifen, continua
+            		addi $t2, $t2, -1                                	# Caso tenha encontrado o hifen, volta um byte para marcar o fim da string
         
         		if_achar_funcao:                                          	# Calcula tamanho e aloca espaço na heap
             		sub $t2, $t2, $t0                                	# Calcula o tamanho da substring: fim - início
@@ -386,20 +386,20 @@ get_funcao:
 	
 # Funcao processar_comando -> Processar o input do usuário para descobri qual comendo está sendo utilizado
 # input -> entrada do usuário
-# separador -> seria o 'hifen' -
+# hifen -> seria o 'hifen' -
 # $v0 -> Resultado do comando que foi digitado
 processar_comando:
     la $t0, input                                                       	# Armazena o input do usuário
     lb $t1, 0($t0)
     beqz $t1, fim_processar
     addi $t1, $zero, -1                                               	# Tamanho do nome do comando
-    la $t3, separador                                                   	# Carrega o hifen (-)
+    la $t3, hifen                                                   	# Carrega o hifen (-)
     lb $t3, 0($t3)
     
     loop_processar:                                                      
         lb $t2, 0($t0)                                                  	# Carrega o byte atual lido de input em $t2
         beqz $t2, comparar_cmd                                            	# Se chegar no fim da string, desvia para o comparador de comando
-        beq $t2, $t3, comparar_cmd                                       	# Se encontrar o separador, vai pro switch case
+        beq $t2, $t3, comparar_cmd                                       	# Se encontrar o hifen, vai pro switch case
         addi $t0, $t0, 1                                                	# +1 no cursor da string input  
         addi $t1, $t1, 1                                                	# +1 no tamanho do nome do comando
         
