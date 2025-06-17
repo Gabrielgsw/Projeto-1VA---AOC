@@ -1,3 +1,10 @@
+# Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+# Gabriel Germano dos Santos Wanderley
+# Samara Accioly
+# Vitor Barros de Carvalho
+# Wellington Viana da Silva Junior
+# Arquivo referente as funções auxiliares importantes para o funcionamento do código, como funções de manipulação de dados e criação do condomínio
+
 .data
 	int_to_str_buffer: .space 4
 	

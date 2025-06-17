@@ -1,3 +1,11 @@
+# Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+# Gabriel Germano dos Santos Wanderley
+# Samara Accioly
+# Vitor Barros de Carvalho
+# Wellington Viana da Silva Junior
+# Questão 1) letra d)
+# Arquivo referente à função 'strmcmp': Similar à função strcmp, exceto por especificar um número máximo de caracteres que devem ser comparados ao invés da string completa. Compara até um número num de caracteres da string apontada por str1 com a string apontada por str2.
+
 .data
 	str1: .asciiz "abacaxi!"
 	str2: .asciiz "abacate!"

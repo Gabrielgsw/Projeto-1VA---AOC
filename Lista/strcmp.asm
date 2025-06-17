@@ -1,3 +1,11 @@
+# Atividade 1VA - Arquitetura e Organizacao de Computadores [2025.1]
+# Gabriel Germano dos Santos Wanderley
+# Samara Accioly
+# Vitor Barros de Carvalho
+# Wellington Viana da Silva Junior
+# Questão 1) letra c)
+# Arquivo referente à função 'strmcmp': Compara a string apontada por str1 com a string apontada por str2. Esta função deve comparar o primeiro caractere de cada string.
+
 .data
 	str1: .asciiz "abacate!"
 	str2: .asciiz "abacate!"
