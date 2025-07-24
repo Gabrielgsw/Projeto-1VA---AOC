@@ -6,7 +6,7 @@
 
 # Projeto Condomínio/Lista
 
-O objetivo deste projeto é implementar um sistema de cadastro de pessoas e automóveis para um condomínio. Este sistema de cadastro deve ser operado através de um terminal (shell) que funciona como um interpretador de comandos de texto, ou seja, o sistema vai ficar constantemente checando por entradas de texto (string) e interpretando o que for recebido a partir de uma lista de comandos que o sistema deve ser capaz de executar. Os comandos que devem ser implementados serão descritos adiante na seção de requisitos de projeto. 
+O objetivo deste projeto é implementar um sistema de cadastro de pessoas e automóveis para um condomínio. Este sistema de cadastro deve ser operado através de um terminal (shell) que funciona como um interpretador de comandos de texto, ou seja, o sistema vai ficar constantemente checando por entradas de texto (string) e interpretando o que for recebido a partir de uma lista de comandos que o sistema deve ser capaz de executar. Os comandos que devem ser implementados serão descritos adiante na seção de requisitos de projeto. O projeto deve ser implementado de forma organizada e hierárquica. Utilize diferentes arquivos para a implementação dos diferentes módulos. Recomenda-se fortemente o uso do github para desenvolvimento do projeto. 
 
 
 # Estrutura do Projeto
